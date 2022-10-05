@@ -1,0 +1,26 @@
+cat 'wages (1).csv' | tail -n+2 | cut -d , -f 1,2 | sort -t , -k1,1 -k2,2n | uniq | sed 's/,/ /' > uniqcombos.txt
+echo Created uniqcombos.txt
+#this code will list the unique combinations of gener and yearsExperience
+
+echo ""
+echo highestearner
+cat 'wages (1).csv' | sort -n -t , -k 4 | cut -d , -f 1,2,4 | tail -n 1
+#this code, when run, will give information on the highestearner
+
+echo ""
+echo lowestearner
+cat 'wages (1).csv' | tail -n+2 | sort -n -t , -k 4 | cut -d , -f 1,2,4 | head -n 1
+#this code, when run, will give information on the lowest earner
+
+echo ""
+echo number of females in the top ten earners
+cat 'wages (1).csv' | tail -n+2 | sort -n -t , -k 4 | tail -n 10 | grep "female" | wc -l
+#this code presents the number of females that are a top ten earner of the company
+
+echo ""
+echo Difference in minimum wage of someone who graduated college vs someone who did not graduate college
+yescollege=$(cat 'wages (1).csv' | tail -n+2 | sort -n -t , -k 4 | grep .*,.*,16.* | head -n 1 | cut -d , -f 4)
+nocollege=$(cat 'wages (1).csv' | tail -n+2 | sort -n -t , -k 4 | grep .*,.*,12.* | head -n 1 | cut -d , -f 4)
+echo "$yescollege - $nocollege" | bc
+#this code will calculate the difference between the lowest wage of someone who graduated college minus the lowest wage of someone who did not graduate college
+

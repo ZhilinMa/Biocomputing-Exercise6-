@@ -1,0 +1,46 @@
+Problem 1:
+
+cat wages.csv | grep -v gender | cut -d, -f 1,2 | sort -u | tr "," " "| 
+sort -k1,1d -k2,2n > newwages.txt
+
+Problem 2:
+Highest earner:
+ cat wages.csv | grep -v gender | cut -d, -f 1,2,4 | sort -u | tr "," " 
+" | sort -k3,3n | tail -n 1  
+
+ANSWER: male 5 39.808917197
+
+Lowest Earner:
+cat wages.csv | grep -v gender | cut -d, -f 1,2,4 | sort -u | tr "," " " | 
+sort -k3,3n | head -n 1
+       
+ANSWER_female 9 0.07655561
+
+Top 10 Female earners:
+ cat wages.csv | grep -v gender | cut -d, -f 1,2,4 | sort -u | tr "," " 
+" | sort -k1,1r -k3,3n | tail -n 10 
+
+ANSWER: female 7 15.923566879
+female 9 16.003584803
+female 4 16.472655392
+female 9 16.780989711
+female 6 16.971826768
+female 6 18.515775441
+female 9 20.99811017
+female 9 21.231422505
+female 8 30.862170858
+female 9 32.497400234
+
+Problem 3:
+
+12years=$(cat wages.csv | cut -d, -f 3,4 | tr "," " " | grep -w 12 | sort 
+-n -k 2 | head -n 1 | cut -d " " -f 2)
+
+ANSWER:12years=0.1028907398
+
+16years=$(cat wages.csv | cut -d, -f 3,4 | tr "," " " | grep -w 16 | 
+sort -n -k 2 | head -n 1 | cut -d " " -f 2)
+
+ANSWER:  16years=4.184513117
+
+echo "$16years-$12years"| bc

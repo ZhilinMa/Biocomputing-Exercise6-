@@ -16,9 +16,9 @@ cat wages.csv | sed 's/,/ /g' | cut -d ' ' -f 1,2,4 | sort -u -t ' ' -k3n | tail
 cat wages.csv | sed 's/,/ /g' | cut -d ' ' -f 1,2,4 | sort -u -t ' ' -k3n | head -n 1
 
 # Question 2, Part 3
-# To sort wages.csv to find the top 10 female wages
+# To sort wages.csv to find the number of females in the top 10 earners
 # usage: cat file_name | bash number2.sh
-cat wages.csv | sed 's/,/ /g' | grep female | cut -d ' ' -f 1,4 | sort -u -t ' ' -k2n | tail -n 10
+cat wages.csv | sed 's/,/ /g' | cut -d ' ' -f 1,4 | sort -u -t ' ' -k2n | tail -n 10 | grep female | wc -l
 
 # Question 3
 # Will display the effect of graduating college on the minimum wage for earners 

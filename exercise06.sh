@@ -13,27 +13,28 @@
 #genders and unique years of experinece.
 #This unique list is sorted by gender then years of experince
 
-cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2 | sed -E s'/,/ /g'| sort -u -t ' ' -k1,1 -k2,2n >gender-yearsExperience.txt
+cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2 | sed -E s'/,/ /g'| sort -u -t ' ' -k 1,1 -k 2,2n >gender-yearsExperience.txt
 
 #Part2) Three Pipelines that will return 3 values to stdout
 # Line 1 with output the gender, years experinece, wage of employee with highest wage
 # Line 2 will output the gender, years experinece, wage of lowest earner
-# Line 3 will be the top 10 women earners 
+# Lines 3-12 will be the top 10 women earners 
 
-cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k3n | tail -n 1
+cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k 3n | tail -n 1
 
-cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k3n | head -n 1
+cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k 3n | head -n 1
 
-cat 'wages (1).csv' | grep -E "female" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k3n | tail -n 10 
+cat 'wages (1).csv' | grep -E "female" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k 3n | tail -n 10 
 
 #Part3) Command to output the difference in minimum salary between employees with 16 years of school vs 12
 #The variable "collegedegree" represents employees with 16 years of school
 # The variable "nocollege" represents employees with 12 years of school
+# The final line to stdout is the numeric difference between the lowest college earner and the lowest non college earner
 
-collegedegree=$ cat 'wages (1).csv' | cut -d , -f 3,4 | sed -E 's/,/ /g' | grep -E "16 " | cut -d ' ' -f 2 | sort -n | head -n 1
+collegedegree=$(cat 'wages (1).csv' | cut -d , -f 3,4 | sed -E 's/,/ /g' | grep -E "16 " | cut -d ' ' -f 2 | sort -n | head -n 1 )
 
-nocollege=$ cat 'wages (1).csv' | cut -d , -f 3,4 | sed -E 's/,/ /g' | grep -E "12 " | cut -d ' ' -f 2 | sort -n | head -n 1
+nocollege=$(cat 'wages (1).csv' | cut -d , -f 3,4 | sed -E 's/,/ /g' | grep -E "12 " | cut -d ' ' -f 2 | sort -n | head -n 1)
 
 echo "$collegedegree - $nocollege" | bc 
 
-#This code work for everything but the bc code. However, I have added it onto my script as if it did work, based on Dr. Jones comments.
+

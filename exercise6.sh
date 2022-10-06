@@ -6,6 +6,9 @@
 #Sort rows by gender, then by years experience; keep pairings intact
 #Saves file as gender_and_experience.txt
 
+cut -d, -f 1,2 > gender_and_experience.txt
+cat gender_and_experience.txt|tail +2|sort -t, -k2n
+
 #Q2
 #Return following to stdout
 #Gender, years experience, wage (highest earner) (max)

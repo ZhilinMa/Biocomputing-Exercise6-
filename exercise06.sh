@@ -24,7 +24,7 @@ cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2,4 | sed -E s'/,/
 
 cat 'wages (1).csv' | grep -E "(female|male)" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k 3n | head -n 1
 
-cat 'wages (1).csv' | grep -E "female" | cut -d , -f 1,2,4 | sed -E s'/,/ /g' | sort -t ' ' -k 3n | tail -n 10 
+cat 'wages (1).csv' | cut -d , -f 1,4 | sed -E s'/,/ /g' | sort -t ' ' -k 2n | tail -n 10 | grep "female" | wc -l
 
 #Part3) Command to output the difference in minimum salary between employees with 16 years of school vs 12
 #The variable "collegedegree" represents employees with 16 years of school

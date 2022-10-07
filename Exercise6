@@ -1,0 +1,25 @@
+#question 1
+cat "wages (1).csv" | cut -d , -f 1,2 | sort | uniq | sed 's/,/ /g' > gender_yearsExperience
+
+#question 2
+highsalary=$(cat "wages (1).csv" | cut -d , -f 4 | sort -n -r | head -n 1)
+cat "wages (1).csv | grep $highsalary
+
+lowsalary=$(cat "wages (1).csv" | tail -n +2 - | cut -d , -f 4 | sort -n | head -n 1)
+cat "wages (1).csv" | grep $lowsalary
+
+highfemalesalary=$(cat "wages (1).csv" | cut -d , -f 4 | sort -n -r | head -n 10)
+femalecount=$(for i in $highfemalesalary
+do
+cat "wages (1).csv" | grep $i | grep female
+done)
+echo "$femalecount" | wc -l
+
+#question 3
+minsalary12=$(cat "wages (1).csv" | grep -E '(female|male),[0-9]+,12' | cut -d , -f 4 | sort -n | head -n 1)
+cat "wages (1).csv" | grep $minsalary12
+
+minsalary16=$(cat "wages (1).csv" | grep -E '(female|male),[0-9]+,16' | cut -d , -f 4 | sort -n | head -n 1)
+cat "wages (1).csv" | grep $minsalary16
+
+echo "$minsalary16 - $minsalary12" | bc

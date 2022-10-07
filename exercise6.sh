@@ -1,14 +1,13 @@
-#Usage: cat file|bash exercise6.sh
-
+#Usage: bash exercise6.sh file
 #Q1
 #Write a file containing unique gender/years experience (cut -d, -f 1,2|...|uniq > gender_and_experience.txt)
 #Replace the commas with a space (sed 's/,/ /g')
 #Sort rows by gender, then by years experience; keep pairings intact (sort -t, -k1,1 -k2,2n)
 
 
-cut -d, -f 1,2|tail +2|sort -t, -k1,1 -k2,2n|sed 's/,/ /g'|uniq > gender_and_experience.txt
-#opens that file
-cat gender_and_experience.txt
+cat $1|cut -d, -f 1,2|tail +2|sort -t, -k1,1 -k2,2n|sed 's/,/ /g'|uniq > gender_and_experience.txt
+#line below opens that file to verify, delete "# to check"
+#cat gender_and_experience.txt
 
 #Q2
 #Return following to stdout
@@ -17,6 +16,18 @@ cat gender_and_experience.txt
 #Number of females in top 10 earners
 
 
+#isolate how many of top 10 earners are female
+echo "Number of females in Top 10 earners:"
+cat $1|sort -t, -k4rn|head -n +10|grep -a "female"|wc -l
+
+#isolate highest earner
+echo "Highest earner statistics"
+cat $1|sort -t, -k4rn|head -n +1
+
+#isolate lowest earner
+echo "Lowest earner statistics"
+cat $1|sort -t, -k4n|head -n +2|tail -n -1
+
 #Q3
 #Return following to stdout
 #Effect of graduating college on minimum wage of dataset
@@ -24,5 +35,7 @@ cat gender_and_experience.txt
 
 #Assign output variable to min (12), and min (16)
 #Calculate difference from the values using bc
+echo "Q3 Starts HERE"
 
+cat $1|sort -t, -k4rn|grep -E "12"
 

@@ -24,8 +24,8 @@ cat wages.csv | sed 's/,/ /g' | cut -d ' ' -f 1,4 | sort -u -t ' ' -k2n | tail -
 # Will display the effect of graduating college on the minimum wage for earners 
 # included in the wages.csv file
 # usage: cat file_name | bash number 2.sh
-collegedegree=$(cat 'wages.csv' | cut -d , -f 3,4 | sed 's/,/ /g' | grep -E "16" | cut -d ' ' -f 2 | sort -n | head -n 1)
-nocollege=$(cat 'wages.csv' | cut -d , -f 3,4 | sed 's/,/ /g' | grep -E "12" | cut -d ' ' -f 2 | sort -n | head -n 1)
+collegedegree=$(cat 'wages.csv' | cut -d , -f 3,4 | sed 's/,/ /g' | grep -E "16" | cut -d ' ' -f 2 | sort -n | head -n 1)  #use (grep -w) to find exactly matched number, find the wrong number, try <cat wages.csv | cut -d "," -f 3,4 | sed 's/,/ /g' | grep -w 16 | sort -n -k 2 | head -n 1 | cut -d " " -f 2> instead
+nocollege=$(cat 'wages.csv' | cut -d , -f 3,4 | sed 's/,/ /g' | grep -E "12" | cut -d ' ' -f 2 | sort -n | head -n 1) #use (grep -w) to find exactly matched number 
 echo "$collegedegree - $nocollege" | bc
 
 

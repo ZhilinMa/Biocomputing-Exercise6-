@@ -1,4 +1,4 @@
-cat wages.csv | tail -n +2 | cut -d , -f 1,2 | sort -t , -k 1 -k 2 -n | sed 's/,/ /g' > genExp.txt
+cat wages.csv | tail -n +2 | cut -d , -f 1,2 | sort -t , -k 1 -k 2 -n | sed 's/,/ /g' > genExp.txt  #you should get a unique gender-yearsExperience combinations here, so add -u to your sort( sort -u -t , -k 1 -k 2 -n )
 
 echo "highest earner:"
 cat wages.csv | tail -n +2 | sort -t , -k 4 -nr | cut -d , -f 1,2,4  | head -n 1

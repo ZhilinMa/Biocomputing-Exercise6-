@@ -1,5 +1,5 @@
 # 1 - gender/years
-cat wages.csv | cut -d , -f 1,2 | sed 's/,/ /g' | sort -t  , -k 1 -k 2 > gender-yearsExperience.txt
+cat wages.csv | cut -d , -f 1,2 | sed 's/,/ /g' | sort -t  , -k 1 -k 2 > gender-yearsExperience.txt  # add -u to the sort to find the unique gender-yearsExperience combinations
 
 # 2.1 - highest earner
 echo "Highest Earner:"

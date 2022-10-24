@@ -27,11 +27,14 @@ cat "$1" | sort -n -r -t , -k 4 | head -n 10 | grep "female" | wc -l
 
 #this line isolates those with 12 yrs school, isolates the fourth column, sorts to find the lowest wage, and stores it
 #as a variable
-min_hs_wage=$(grep "\d\,12\,\d" "$1" | cut -d , -f 4 | sort -n | head -n 1)
+min_hs_wage=$(grep "\d\,12\,\d" "$1" | cut -d , -f 4 | sort -n | head -n 1) 
 
 #this line isolates those with 16 yrs school, isolates the fourth column, sorts to find the lowest wage, and stores it  
 #as a variable
 min_col_wage=$(grep "\d\,16\,\d" "$1" | cut -d , -f 4 | sort -n | head -n 1)
+
+#could not get correcct number, you should find the only match 12/16 yrs school, not all the lines contained the number 12/16, even 12 is inside a digit,like 3.45126
+#cat wages.csv | cut -d "," -f 3,4 | tr "," " " | grep -w 12 | sort -n -k 2 | head -n 1 | cut -d " " -f 2
 
 #these lines announce that the college/HS min wage difference is being displayed and then subtracts the min HS wage
 #variable from the min college wage variable and displays the result

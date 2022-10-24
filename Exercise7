@@ -16,7 +16,7 @@ sort -k3,3n | head -n 1
        
 ANSWER_female 9 0.07655561
 
-Top 10 Female earners:
+Top 10 Female earners:  # we want to get the number of females in the top ten earners, not top 10 females here
  cat wages.csv | grep -v gender | cut -d, -f 1,2,4 | sort -u | tr "," " 
 " | sort -k1,1r -k3,3n | tail -n 10 
 
